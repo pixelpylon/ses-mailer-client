@@ -1,0 +1,17 @@
+{
+  "name": "ses-mailer-client",
+  "version": "1.0.0",
+  "description": "Own City Tour mailer based on SES and Firebase function",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "12"
+  },
+  "author": "Kosolapov Ivan <polzuka@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
