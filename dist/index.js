@@ -4,7 +4,7 @@ const {
   tokenizeCredentials,
   tryInitializeMailer,
   trySendEmail,
-  getService,
+  getMailerService,
 } = require("./utils");
 const {checkSendErrorEmailParams, checkSendEmailParams} = require("./checkers");
 
@@ -44,9 +44,9 @@ class Mailer {
         ? `<pre>${errorText}</pre><br><pre>${payloadText}</pre>`
         : `<pre>${errorText}</pre>`;
 
-      const service = getService({service, error});
+      const mailerService = getMailerService({service, error});
 
-      return this.instance.post('/sendErrorEmail', {service, subject, html});
+      return this.instance.post('/sendErrorEmail', {service: mailerService, subject, html});
     });
   }
 }

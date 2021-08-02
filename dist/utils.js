@@ -27,7 +27,7 @@ async function trySendEmail (mailer, fn) {
   }
 }
 
-function getService ({service, error}) {
+function getMailerService ({service, error}) {
   if (service) {
     return service;
   }
@@ -43,5 +43,5 @@ module.exports = {
   tokenizeCredentials,
   tryInitializeMailer,
   trySendEmail,
-  getService,
+  getMailerService,
 }
