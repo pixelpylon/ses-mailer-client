@@ -1,3 +1,5 @@
+const {MAILER_SERVICES} = require("./consts");
+
 function tokenizeCredentials (login, password) {
   return Buffer.from(`${login}:${decodeURIComponent(password)}`).toString('base64');
 }
@@ -25,8 +27,21 @@ async function trySendEmail (mailer, fn) {
   }
 }
 
+function getService ({service, error}) {
+  if (service) {
+    return service;
+  }
+
+  if (error.service) {
+    return error.service;
+  }
+
+  return MAILER_SERVICES.DEFAULT;
+}
+
 module.exports = {
   tokenizeCredentials,
   tryInitializeMailer,
   trySendEmail,
+  getService,
 }

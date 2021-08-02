@@ -21,10 +21,6 @@ function checkSendErrorEmailParams ({service, subject, error, payload}) {
     throw new Error(`Mandatory parameter 'error' is not passed`);
   }
 
-  if (!service) {
-    throw new Error(`Mandatory parameter 'service' is not passed`);
-  }
-
   if (!subject) {
     throw new Error(`Mandatory parameter 'subject' not passed`);
   }

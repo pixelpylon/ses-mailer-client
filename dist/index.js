@@ -1,5 +1,11 @@
 const axios = require('axios');
-const {tokenizeCredentials, tryInitializeMailer, trySendEmail} = require("./utils");
+const {MAILER_SERVICES} = require("./consts");
+const {
+  tokenizeCredentials,
+  tryInitializeMailer,
+  trySendEmail,
+  getService,
+} = require("./utils");
 const {checkSendErrorEmailParams, checkSendEmailParams} = require("./checkers");
 
 class Mailer {
@@ -38,9 +44,11 @@ class Mailer {
         ? `<pre>${errorText}</pre><br><pre>${payloadText}</pre>`
         : `<pre>${errorText}</pre>`;
 
+      const service = getService({service, error});
+
       return this.instance.post('/sendErrorEmail', {service, subject, html});
     });
   }
 }
 
-module.exports = {Mailer};
+module.exports = {Mailer, MAILER_SERVICES};
