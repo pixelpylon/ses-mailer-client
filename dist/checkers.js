@@ -3,7 +3,7 @@ function checkSendEmailParams ({from, to, subject, text, html}) {
     throw new Error(`Mandatory parameter 'subject' is not passed`);
   }
 
-  if (!html || !text) {
+  if (!html && !text) {
     throw new Error(`Must pass parameter 'html' or 'text'`);
   }
 
