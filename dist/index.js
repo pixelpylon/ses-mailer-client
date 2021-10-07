@@ -38,14 +38,12 @@ class Mailer {
     return trySendEmail(this, () => {
       checkSendErrorEmailParams({service, subject, error, payload});
       const errorText = error.stack;
-      const payloadText = JSON.stringify(payload, null, 2);
+      const payloadText = payload
+        ? JSON.stringify(payload, null, 2)
+        : '[No payload]';
 
-      const html = payloadText
-        ? `<pre>${errorText}</pre><br><pre>${payloadText}</pre>`
-        : `<pre>${errorText}</pre>`;
-
+      const html = `<pre>${errorText}</pre><br><pre>${payloadText}</pre>`;
       const mailerService = getMailerService({service, error});
-
       return this.instance.post('/sendErrorEmail', {service: mailerService, subject, html});
     });
   }
