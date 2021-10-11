@@ -1,4 +1,4 @@
-function checkSendEmailParams ({from, to, subject, text, html}) {
+function checkSendEmailParams ({from, to, subject, text, html, replyTo}) {
   if (!subject) {
     throw new Error(`Mandatory parameter 'subject' is not passed`);
   }

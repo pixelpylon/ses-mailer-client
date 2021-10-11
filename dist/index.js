@@ -4,9 +4,9 @@ const {
   tokenizeCredentials,
   tryInitializeMailer,
   trySendEmail,
-  getMailerService,
 } = require("./utils");
 const {checkSendErrorEmailParams, checkSendEmailParams} = require("./checkers");
+const {transformSendEmailParams, transformSendErrorEmailParams} = require("./transformers");
 
 class Mailer {
   constructor (url) {
@@ -27,24 +27,19 @@ class Mailer {
     }
   }
 
-  send ({from, to, subject, text, html}) {
+  send (params) {
     return trySendEmail(this, () => {
-      checkSendEmailParams({from, to, subject, text, html});
-      return this.instance.post('/sendEmail', {from, to, subject, text, html});
+      checkSendEmailParams(params);
+      const transformedParams = transformSendEmailParams(params);
+      return this.instance.post('/sendEmail', transformedParams);
     })
   }
 
-  sendError ({service, subject, error, payload}) {
+  sendError (params) {
     return trySendEmail(this, () => {
-      checkSendErrorEmailParams({service, subject, error, payload});
-      const errorText = error.stack;
-      const payloadText = payload
-        ? JSON.stringify(payload, null, 2)
-        : '[No payload]';
-
-      const html = `<pre>${errorText}</pre><br><pre>${payloadText}</pre>`;
-      const mailerService = getMailerService({service, error});
-      return this.instance.post('/sendErrorEmail', {service: mailerService, subject, html});
+      checkSendErrorEmailParams(params);
+      const transformedParams = transformSendErrorEmailParams(params);
+      return this.instance.post('/sendErrorEmail', transformedParams);
     });
   }
 }

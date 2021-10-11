@@ -39,9 +39,16 @@ function getMailerService ({service, error}) {
   return MAILER_SERVICES.DEFAULT;
 }
 
+function toArray (value) {
+  return Array.isArray(value)
+    ? value
+    : [value];
+}
+
 module.exports = {
   tokenizeCredentials,
   tryInitializeMailer,
   trySendEmail,
   getMailerService,
+  toArray,
 }
