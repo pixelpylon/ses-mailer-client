@@ -7,7 +7,7 @@ function transformSendEmailParams ({from, to, subject, text, html, replyTo}) {
     subject,
     text,
     html,
-    replyTo: toArray(to),
+    replyTo: toArray(replyTo),
   };
 }
 
