@@ -26,7 +26,14 @@ function checkSendErrorEmailParams ({service, subject, error, payload}) {
   }
 }
 
+function checkValidateAddressParams ({email}) {
+  if (!email) {
+    throw new Error(`Mandatory parameter 'email' is not passed`);
+  }
+}
+
 module.exports = {
   checkSendEmailParams,
   checkSendErrorEmailParams,
+  checkValidateAddressParams,
 }

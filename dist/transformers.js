@@ -27,7 +27,12 @@ function transformSendErrorEmailParams ({service, subject, error, payload}) {
   };
 }
 
+function transformValidateAddressParams ({email}) {
+  return {email};
+}
+
 module.exports = {
   transformSendEmailParams,
   transformSendErrorEmailParams,
-}
+  transformValidateAddressParams,
+};

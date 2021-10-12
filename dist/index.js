@@ -1,12 +1,23 @@
 const axios = require('axios');
 const {MAILER_SERVICES} = require("./consts");
+
 const {
   tokenizeCredentials,
   tryInitializeMailer,
-  trySendEmail,
+  tryExecute,
 } = require("./utils");
-const {checkSendErrorEmailParams, checkSendEmailParams} = require("./checkers");
-const {transformSendEmailParams, transformSendErrorEmailParams} = require("./transformers");
+
+const {
+  checkSendErrorEmailParams,
+  checkSendEmailParams,
+  checkValidateAddressParams,
+} = require("./checkers");
+
+const {
+  transformSendEmailParams,
+  transformSendErrorEmailParams,
+  transformValidateAddressParams,
+} = require("./transformers");
 
 class Mailer {
   constructor (url) {
@@ -28,7 +39,7 @@ class Mailer {
   }
 
   send (params) {
-    return trySendEmail(this, () => {
+    return tryExecute(this, () => {
       checkSendEmailParams(params);
       const transformedParams = transformSendEmailParams(params);
       return this.instance.post('/sendEmail', transformedParams);
@@ -36,10 +47,18 @@ class Mailer {
   }
 
   sendError (params) {
-    return trySendEmail(this, () => {
+    return tryExecute(this, () => {
       checkSendErrorEmailParams(params);
       const transformedParams = transformSendErrorEmailParams(params);
       return this.instance.post('/sendErrorEmail', transformedParams);
+    });
+  }
+
+  validateAddress (params) {
+    return tryExecute(this, () => {
+      checkValidateAddressParams(params);
+      const transformedParams = transformValidateAddressParams(params);
+      return this.instance.post('/validateEmailAddress', transformedParams);
     });
   }
 }

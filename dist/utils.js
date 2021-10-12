@@ -14,7 +14,7 @@ function tryInitializeMailer (fn) {
   }
 }
 
-async function trySendEmail (mailer, fn) {
+async function tryExecute (mailer, fn) {
   if (mailer.error) {
     console.error('Sending was skipped because mailer was not initialized correctly')
     return;
@@ -48,7 +48,7 @@ function toArray (value) {
 module.exports = {
   tokenizeCredentials,
   tryInitializeMailer,
-  trySendEmail,
+  tryExecute,
   getMailerService,
   toArray,
 }
