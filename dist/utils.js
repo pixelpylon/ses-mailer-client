@@ -17,13 +17,15 @@ function tryInitializeMailer (fn) {
 async function tryExecute (mailer, fn) {
   if (mailer.error) {
     console.error('Sending was skipped because mailer was not initialized correctly')
-    return;
+    return {error: mailer.error};
   }
 
   try {
     await fn();
+    return {};
   } catch (error) {
     console.error(error);
+    return {error};
   }
 }
 
