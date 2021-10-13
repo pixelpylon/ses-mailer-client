@@ -6,8 +6,9 @@ const test = async (mailerUrl) => {
   const result = await mailer.send({
     subject: 'Test',
     text: 'test',
-    from: 'tea@citytour.dev',
+    from: 'team@citytour.dev',
     to: 'polzuka@gmail.com',
+    bcc: 'imyrec@gmail.com',
   })
 
   console.log(result);
