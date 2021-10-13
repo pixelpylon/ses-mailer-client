@@ -1,4 +1,5 @@
 const axios = require('axios');
+const {getMailerService} = require("./utils");
 const {MAILER_SERVICES} = require("./consts");
 
 const {
@@ -6,18 +7,6 @@ const {
   tryInitializeMailer,
   tryExecute,
 } = require("./utils");
-
-const {
-  checkSendErrorEmailParams,
-  checkSendEmailParams,
-  checkValidateAddressParams,
-} = require("./checkers");
-
-const {
-  transformSendEmailParams,
-  transformSendErrorEmailParams,
-  transformValidateAddressParams,
-} = require("./transformers");
 
 class Mailer {
   constructor (url) {
@@ -40,25 +29,38 @@ class Mailer {
 
   send (params) {
     return tryExecute(this, () => {
-      checkSendEmailParams(params);
-      const transformedParams = transformSendEmailParams(params);
-      return this.instance.post('/sendEmail', transformedParams);
+      return this.instance.post('/sendEmail', params);
     })
   }
 
   sendError (params) {
     return tryExecute(this, () => {
-      checkSendErrorEmailParams(params);
-      const transformedParams = transformSendErrorEmailParams(params);
+      const {service, subject, error, payload} = params;
+
+      const errorText = error
+        ? error.stack
+        : '[No error]';
+
+      const payloadText = payload
+        ? JSON.stringify(payload, null, 2)
+        : '[No payload]';
+
+      const html = `<pre>${errorText}</pre><br><pre>${payloadText}</pre>`;
+      const mailerService = getMailerService({service, error});
+
+      const transformedParams = {
+        subject,
+        html,
+        service: mailerService,
+      };
+
       return this.instance.post('/sendErrorEmail', transformedParams);
     });
   }
 
   validateAddress (params) {
     return tryExecute(this, () => {
-      checkValidateAddressParams(params);
-      const transformedParams = transformValidateAddressParams(params);
-      return this.instance.post('/validateEmailAddress', transformedParams);
+      return this.instance.post('/validateEmailAddress', params);
     });
   }
 }

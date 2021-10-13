@@ -1,4 +1,5 @@
 const {MAILER_SERVICES} = require("./consts");
+const axios = require('axios');
 
 function tokenizeCredentials (login, password) {
   return Buffer.from(`${login}:${decodeURIComponent(password)}`).toString('base64');
@@ -21,9 +22,12 @@ async function tryExecute (mailer, fn) {
   }
 
   try {
-    await fn();
-    return {};
+    const {data} = await fn();
+    return data;
   } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return {error: error.response.data};
+    }
     console.error(error);
     return {error};
   }
@@ -41,16 +45,9 @@ function getMailerService ({service, error}) {
   return MAILER_SERVICES.DEFAULT;
 }
 
-function toArray (value) {
-  return Array.isArray(value)
-    ? value
-    : [value];
-}
-
 module.exports = {
   tokenizeCredentials,
   tryInitializeMailer,
   tryExecute,
   getMailerService,
-  toArray,
 }
