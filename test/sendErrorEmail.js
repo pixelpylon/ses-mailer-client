@@ -15,7 +15,7 @@ const test = async (mailerUrl) => {
 }
 
 if (!process.env.MAILER_URL) {
-  console.log();
+  console.log(`MAILER_URL environment variable must be passed`);
   process.exit(-1);
 }
 

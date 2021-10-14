@@ -63,6 +63,12 @@ class Mailer {
       return this.instance.post('/validateEmailAddress', params);
     });
   }
+
+  getDeniedDomains () {
+    return tryExecute(this, () => {
+      return this.instance.post('/getDeniedDomains');
+    });
+  }
 }
 
 module.exports = {Mailer, MAILER_SERVICES};

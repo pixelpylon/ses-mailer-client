@@ -3,13 +3,7 @@ const {Mailer} = require("../dist");
 const test = async (mailerUrl) => {
   const mailer = new Mailer(mailerUrl);
 
-  const result = await mailer.send({
-    subject: 'Test',
-    text: 'test',
-    from: 'team@citytour.dev',
-    to: 'polzuka@gmail.com',
-    bcc: 'imyrec@gmail.com',
-  })
+  const result = await mailer.getDeniedDomains()
 
   console.log(result);
 }
