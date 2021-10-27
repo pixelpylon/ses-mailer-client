@@ -4,6 +4,7 @@ const MAILER_SERVICES = {
   DRIP: 'drip',
   SLING: 'sling',
   CALENDAR: 'calendar',
+  SUMMIT: 'summit',
   DEFAULT: 'default',
 };
 
