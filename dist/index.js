@@ -58,6 +58,29 @@ class Mailer {
     });
   }
 
+  sendWarning (params) {
+    return tryExecute(this, () => {
+      const {service, subject, warning, payload} = params;
+
+      const warningText = warning || '[No message]';
+
+      const payloadText = payload
+        ? JSON.stringify(payload, null, 2)
+        : '[No payload]';
+
+      const html = `<pre>${warningText}</pre><br><pre>${payloadText}</pre>`;
+      const mailerService = getMailerService({service});
+
+      const transformedParams = {
+        subject,
+        html,
+        service: mailerService,
+      };
+
+      return this.instance.post('/sendErrorEmail', transformedParams);
+    });
+  }
+
   validateAddress (params) {
     return tryExecute(this, () => {
       return this.instance.post('/validateEmailAddress', params);

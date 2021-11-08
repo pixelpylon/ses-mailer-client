@@ -1,6 +1,6 @@
 {
   "name": "ses-mailer-client",
-  "version": "1.9.3",
+  "version": "1.9.4",
   "description": "Own City Tour mailer based on SES and Firebase function",
   "main": "dist/index.js",
   "scripts": {

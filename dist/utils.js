@@ -38,7 +38,7 @@ function getMailerService ({service, error}) {
     return service;
   }
 
-  if (error.service) {
+  if (error && error.service) {
     return error.service;
   }
 
