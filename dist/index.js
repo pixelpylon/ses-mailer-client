@@ -34,39 +34,34 @@ class Mailer {
   }
 
   sendError (params) {
-    return tryExecute(this, () => {
-      const {service, subject, error, payload} = params;
+    const {service, subject, error, payload, to} = params;
 
-      const errorText = error ? error.stack : '[No error]';
-      const payloadText = formatPayload(payload);
+    const message = error ? error.stack : '[No error]';
 
-      const html = `<pre>${errorText}</pre><br><pre>${payloadText}</pre>`;
-      const mailerService = getMailerService({service, error});
-
-      const transformedParams = {
-        subject,
-        html,
-        service: mailerService,
-      };
-
-      return this.instance.post('/sendErrorEmail', transformedParams);
+    return this.sendServiceMessage({
+      service,
+      subject,
+      message,
+      payload,
+      to,
     });
   }
 
-  sendWarning (params) {
+  sendServiceMessage (params) {
     return tryExecute(this, () => {
-      const {service, subject, warning, payload} = params;
+      const {service, subject, message, payload, to} = params;
 
-      const warningText = warning || '[No message]';
+      const messageText = message || '[No message]';
       const payloadText = formatPayload(payload);
 
-      const html = `<pre>${warningText}</pre><br><pre>${payloadText}</pre>`;
+      const html = `<pre>${messageText}</pre><br><pre>${payloadText}</pre>`;
       const mailerService = getMailerService({service});
 
       const transformedParams = {
         subject,
         html,
         service: mailerService,
+        to,
       };
 
       return this.instance.post('/sendErrorEmail', transformedParams);
