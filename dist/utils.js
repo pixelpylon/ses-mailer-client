@@ -45,9 +45,20 @@ function getMailerService ({service, error}) {
   return MAILER_SERVICES.DEFAULT;
 }
 
+function formatPayload (payload) {
+  if (!payload) {
+    return '[No payload]';
+  }
+
+  return typeof payload === 'string'
+    ? payload
+    : JSON.stringify(payload, null, 2);
+}
+
 module.exports = {
   tokenizeCredentials,
   tryInitializeMailer,
   tryExecute,
   getMailerService,
+  formatPayload,
 }

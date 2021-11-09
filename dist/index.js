@@ -1,5 +1,5 @@
 const axios = require('axios');
-const {getMailerService} = require("./utils");
+const {getMailerService, formatPayload} = require("./utils");
 const {MAILER_SERVICES} = require("./consts");
 
 const {
@@ -37,13 +37,8 @@ class Mailer {
     return tryExecute(this, () => {
       const {service, subject, error, payload} = params;
 
-      const errorText = error
-        ? error.stack
-        : '[No error]';
-
-      const payloadText = payload
-        ? JSON.stringify(payload, null, 2)
-        : '[No payload]';
+      const errorText = error ? error.stack : '[No error]';
+      const payloadText = formatPayload(payload);
 
       const html = `<pre>${errorText}</pre><br><pre>${payloadText}</pre>`;
       const mailerService = getMailerService({service, error});
@@ -63,10 +58,7 @@ class Mailer {
       const {service, subject, warning, payload} = params;
 
       const warningText = warning || '[No message]';
-
-      const payloadText = payload
-        ? JSON.stringify(payload, null, 2)
-        : '[No payload]';
+      const payloadText = formatPayload(payload);
 
       const html = `<pre>${warningText}</pre><br><pre>${payloadText}</pre>`;
       const mailerService = getMailerService({service});
