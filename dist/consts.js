@@ -5,7 +5,6 @@ const MAILER_SERVICES = {
   SLING: 'sling',
   CALENDAR: 'calendar',
   SUMMIT: 'summit',
-  DUPLICATE: 'duplicate-notifier',
   DEFAULT: 'default',
 };
 
