@@ -1,17 +1,22 @@
 {
   "name": "ses-mailer-client",
-  "version": "1.9.7",
+  "version": "0.0.10",
   "description": "Own City Tour mailer based on SES and Firebase function",
   "main": "dist/index.js",
+  "typings": "dist/declares/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha 'test/**/*.test.js'"
   },
   "engines": {
-    "node": "14"
+    "node": ">=12"
   },
   "author": "Kosolapov Ivan <polzuka@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.1"
+    "common-utils": "https://github.com/pixelpylon/common-utils/tarball/0.0.55"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.1.3"
   }
 }
