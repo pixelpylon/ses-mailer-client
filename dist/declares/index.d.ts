@@ -15,7 +15,7 @@ export interface ISendErrorParams {
   to?: string | string[]
   subject: string
   error?: Error
-  payload?: string
+  payload?: string | {}
 }
 
 export interface ISendServiceMessageParams {
@@ -23,7 +23,7 @@ export interface ISendServiceMessageParams {
   to?: string | string[]
   subject: string
   message?: string
-  payload?: string
+  payload?: string | {}
 }
 
 export interface IValidateAddressParams {
