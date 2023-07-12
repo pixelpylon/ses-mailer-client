@@ -14,7 +14,7 @@ export interface ISendErrorParams {
   service?: string
   to?: string | string[]
   subject: string
-  error?: Error
+  error?: Error | string
   payload?: string | {}
 }
 

@@ -14,7 +14,7 @@ class Mailer {
   sendError (params) {
     const {service, subject, error, payload, to} = params
 
-    const message = error ? error.stack : '[No error]'
+    const message = error ? (typeof error === 'string' ? error :  error.stack) : '[No error]'
 
     return this.sendServiceMessage({
       service,
