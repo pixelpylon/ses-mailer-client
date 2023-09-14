@@ -1,6 +1,6 @@
 const {getMailerService, formatPayload} = require("./utils")
 const {MAILER_SERVICES} = require("./consts")
-const {RpcClient} = require("common-utils")
+const {RpcClient} = require("@exp1/common-utils")
 
 class Mailer {
   constructor (url) {

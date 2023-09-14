@@ -1,4 +1,4 @@
-import {RestifiedError} from 'common-utils'
+import {RestifiedError} from '@exp1/common-utils'
 
 export interface ISendEmailParams {
   from: string
