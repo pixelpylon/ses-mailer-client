@@ -1,6 +1,6 @@
 {
   "name": "@exp1/ses-mailer-client",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Own City Tour mailer based on SES and Firebase function",
   "main": "dist/index.js",
   "typings": "dist/declares/index.d.ts",
@@ -14,8 +14,8 @@
   "author": "Kosolapov Ivan <polzuka@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@exp1/common-utils": "^0.0.76",
-    "@exp1/back-utils": "^0.0.21"
+    "@exp1/common-utils": "^0.0.80",
+    "@exp1/back-utils": "^0.0.24"
   },
   "devDependencies": {
     "chai": "^4.3.4",
