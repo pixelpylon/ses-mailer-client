@@ -1,9 +1,10 @@
-const {Mailer} = require("../dist")
+const { Mailer } = require("../dist/src");
 
-const MAILER_URL = 'https://Farid:S(ZQH%7B7%25mnXs%24%22Y%24@us-central1-sesmailer-a16cc.cloudfunctions.net'
+const MAILER_URL =
+  "https://Farid:S(ZQH%7B7%25mnXs%24%22Y%24@us-central1-sesmailer-a16cc.cloudfunctions.net";
 
 const getMailer = () => {
-    return new Mailer(MAILER_URL)
-}
+  return new Mailer(MAILER_URL);
+};
 
-module.exports = getMailer
+module.exports = getMailer;

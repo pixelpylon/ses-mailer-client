@@ -1,24 +1,45 @@
 {
   "name": "@exp1/ses-mailer-client",
-  "version": "0.0.15",
-  "description": "Own City Tour mailer based on SES and Firebase function",
-  "main": "dist/index.js",
-  "typings": "dist/declares/index.d.ts",
+  "version": "1.0.0",
+  "description": "Own CityTour mailer based on SES and Firebase function",
+  "main": "dist/src/index.js",
+  "types": "dist/types/index.d.ts",
   "scripts": {
+    "lint": "eslint --fix .",
+    "prepare": "husky install",
     "test": "mocha 'test/**/*.test.js'",
-    "artifactregistry-login": "npx google-artifactregistry-auth"
+    "artifactregistry-login": "npx google-artifactregistry-auth",
+    "publish-package": "bash -c 'publish_pkg () { npm run artifactregistry-login && npm publish && git add -A && git ci -m \"${0:=$(npm pkg get version)}\" && git tag $(npm pkg get version) && git push && git push --tags; }; publish_pkg'"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=20"
   },
   "author": "Kosolapov Ivan <polzuka@gmail.com>",
   "license": "ISC",
-  "dependencies": {
-    "@exp1/common-utils": "^0.0.80",
-    "@exp1/back-utils": "^0.0.24"
+  "peerDependencies": {
+    "@exp1/common-utils": ">=1.0.0",
+    "@exp1/back-utils": ">=1.0.0"
   },
   "devDependencies": {
-    "chai": "^4.3.4",
-    "mocha": "^9.1.3"
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@typescript-eslint/eslint-plugin": "^7.7.0",
+    "@typescript-eslint/parser": "^7.7.0",
+    "chai": "^5.1.0",
+    "eslint": "^8.56.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "mocha": "^10.4.0",
+    "prettier": "3.2.5",
+    "typescript": "^5.4.5",
+    "@exp1/back-utils": "^1.0.0",
+    "@exp1/common-utils": "^1.0.0"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }
